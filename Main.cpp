@@ -131,7 +131,6 @@ void JugarPartida(string nombre, string PiezaUsada, Pieza *pieza, Pieza *rey, ch
         ImprimirMatriz(matrix);
         cout << "Ingrese las coordenadas jugador blanco: ";
         cin >> coordsBlanco;
-        cout << "paso";
         fila1 = 8 - ((int)coordsBlanco[2]);
         columna1 = coordenadachar(coordsBlanco[1]);
         fila2 = 8 - ((int)coordsBlanco[5]);
