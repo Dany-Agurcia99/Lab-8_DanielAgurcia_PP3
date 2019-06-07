@@ -25,6 +25,7 @@ void EliminarMatriz(char **);
 void ImprimirMatriz(char **);
 int coordenadachar(char);
 Pieza *coordPieza(char);
+char **matrix = NULL;
 int main()
 {
     int opcion = 0;
@@ -78,13 +79,15 @@ int main()
                 break;
             }
             Pieza *rey = new Rey('K');
-            char **matrix = CrearMatriz();
+            matrix = CrearMatriz();
             JugarPartida(nombreP, PiezaUsada, pieza, rey, matrix, opcion2);
         }
         break;
         case 2:
             RecrearPartida();
             break;
+        case 3:
+            EliminarMatriz(matrix);
         }
     }
     return 0;
@@ -128,21 +131,21 @@ void JugarPartida(string nombre, string PiezaUsada, Pieza *pieza, Pieza *rey, ch
         ImprimirMatriz(matrix);
         cout << "Ingrese las coordenadas jugador blanco: ";
         cin >> coordsBlanco;
-
-        fila1 = 8 - (coordsBlanco[2] - 0);
+        cout << "paso";
+        fila1 = 8 - ((int)coordsBlanco[2]);
         columna1 = coordenadachar(coordsBlanco[1]);
-        fila2 = 8 - (coordsBlanco[5] - 0);
+        fila2 = 8 - ((int)coordsBlanco[5]);
         columna2 = coordenadachar(coordsBlanco[4]);
-        Pieza* piezaM = coordPieza(matrix[fila1][columna1]);
+        Pieza *piezaM = coordPieza(matrix[fila1][columna1]);
         validarMovimiento = piezaM->Movimiento(fila1, columna1, fila2, columna2);
         while (validarMovimiento == false)
         {
             cout << "Movimiento invalido";
             cout << "Ingrese las coordenadas jugador blanco: ";
             cin >> coordsBlanco;
-            fila1 = 8 - (coordsBlanco[2] - 0);
+            fila1 = 8 - ((int)coordsBlanco[2]);
             columna1 = coordenadachar(coordsBlanco[1]);
-            fila2 = 8 - (coordsBlanco[5] - 0);
+            fila2 = 8 - ((int)coordsBlanco[5]);
             columna2 = coordenadachar(coordsBlanco[4]);
             piezaM = coordPieza(matrix[fila1][columna1]);
             validarMovimiento = piezaM->Movimiento(fila1, columna1, fila2, columna2);
@@ -150,9 +153,9 @@ void JugarPartida(string nombre, string PiezaUsada, Pieza *pieza, Pieza *rey, ch
         StreamMoves << coordsBlanco;
         cout << "Ingrese las coordenadas jugador negro: ";
         cin >> coordsNegro;
-        fila1 = 8 - (coordsNegro[2] - 0);
+        fila1 = 8 - ((int)coordsNegro[2]);
         columna1 = coordenadachar(coordsNegro[1]);
-        fila2 = 8 - (coordsNegro[5] - 0);
+        fila2 = 8 - ((int)coordsNegro[5]);
         columna2 = coordenadachar(coordsNegro[4]);
         piezaM = coordPieza(matrix[fila1][columna1]);
         validarMovimiento = piezaM->Movimiento(fila1, columna1, fila2, columna2);
@@ -161,9 +164,9 @@ void JugarPartida(string nombre, string PiezaUsada, Pieza *pieza, Pieza *rey, ch
             cout << "Movimiento invalido";
             cout << "Ingrese las coordenadas jugador blanco: ";
             cin >> coordsNegro;
-            fila1 = 8 - (coordsNegro[2] - 0);
+            fila1 = 8 - ((int)coordsNegro[2]);
             columna1 = coordenadachar(coordsNegro[1]);
-            fila2 = 8 - (coordsNegro[5] - 0);
+            fila2 = 8 - ((int)coordsNegro[5]);
             columna2 = coordenadachar(coordsNegro[4]);
             piezaM = coordPieza(matrix[fila1][columna1]);
             validarMovimiento = piezaM->Movimiento(fila1, columna1, fila2, columna2);
@@ -173,11 +176,12 @@ void JugarPartida(string nombre, string PiezaUsada, Pieza *pieza, Pieza *rey, ch
         cin >> resp;
     }
     Moves = StreamMoves.str();
-
-    //escribir en el archivo
+    Partida *partida = new Partida(nombre, PiezaUsada, Moves);
+    partida->guardarPartida(nombre, PiezaUsada, Moves);
 }
 void RecrearPartida()
 {
+    //nada
 }
 char **CrearMatriz()
 {

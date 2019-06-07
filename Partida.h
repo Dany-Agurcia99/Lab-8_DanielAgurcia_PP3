@@ -7,11 +7,15 @@ using std::vector;
 #include <string>
 using std::string;
 
+#include <fstream>
+using std::ofstream;
 class Partida
 {
 private:
-    string nombre, piezaUsada, movimientos;
+    string nombre, tipo, moves;
 public:
-    void guardarPartida(string,string,string);
+    Partida();
+    Partida(string, string, string);
+    void guardarPartida(string, string, string);
 };
 #endif
