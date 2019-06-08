@@ -149,7 +149,7 @@ void JugarPartida(string nombre, string PiezaUsada, Pieza *pieza, Pieza *rey, ch
             piezaM = coordPieza(matrix[fila1][columna1]);
             validarMovimiento = piezaM->Movimiento(fila1, columna1, fila2, columna2);
         }
-        StreamMoves << coordsBlanco;
+        StreamMoves << coordsBlanco<<";";
         cout << "Ingrese las coordenadas jugador negro: ";
         cin >> coordsNegro;
         fila1 = 8 - ((int)coordsNegro[2]);
@@ -170,7 +170,7 @@ void JugarPartida(string nombre, string PiezaUsada, Pieza *pieza, Pieza *rey, ch
             piezaM = coordPieza(matrix[fila1][columna1]);
             validarMovimiento = piezaM->Movimiento(fila1, columna1, fila2, columna2);
         }
-        StreamMoves << coordsNegro;
+        StreamMoves << coordsNegro<<";";
         cout << "Desea continuar? [s/n]: ";
         cin >> resp;
     }
